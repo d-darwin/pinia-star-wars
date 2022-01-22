@@ -1,0 +1,10 @@
+.hero {
+  border: 1px solid;
+  padding: 20px;
+  text-align: justify;
+}
+
+.crawl {
+  margin-top: 12px;
+  font-size: 0.8rem;
+}

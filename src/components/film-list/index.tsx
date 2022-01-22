@@ -2,6 +2,7 @@ import { defineComponent, Transition, VNode } from "vue";
 import { useFilmStore } from "@/store/film";
 import { useStarshipStore } from "@/store/starship";
 import spinnerSrc from "@/assets/spinner-light.svg";
+import FilmHero from "./hero";
 import styles from "./index.css?module";
 
 export default defineComponent({
@@ -37,15 +38,21 @@ export default defineComponent({
     } else if (this.filmStore.list.length) {
       content = (
         <ul class={styles.content}>
-          {this.filmStore.list.map((item) => (
-            <li>{item.title}</li>
+          {this.filmStore.list.map((film) => (
+            <FilmHero item={film} class={styles.hero} />
           ))}
         </ul>
       );
     }
 
     return (
-      <section class={styles.section}>
+      <section
+        class={{
+          [styles.section]: true,
+          [styles.loaded]:
+            this.filmStore.list.length && !this.filmStore.pending,
+        }}
+      >
         <h2 class={styles.title}>Movies</h2>
         <Transition name="fade" mode="out-in">
           {content}

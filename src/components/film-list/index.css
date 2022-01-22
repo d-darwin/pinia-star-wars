@@ -4,6 +4,13 @@
   color: whitesmoke;
   font-weight: 500;
   z-index: 1;
+  overflow: hidden;
+  width: calc(100% / 3);
+  transition: width 300ms ease-in-out;
+}
+
+.loaded {
+  width: 100%;
 }
 
 .section:before {
@@ -17,11 +24,21 @@
 }
 
 .title {
-  padding: 8px 12px;
+  margin-top: 16px;
+  padding: 8px;
   border-bottom: 3px solid whitesmoke;
 }
 
 .content {
+  padding: 24px;
   margin: auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
+.hero {
+  flex: 1 1 30%;
+  max-width: 30%;
+}
