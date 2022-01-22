@@ -1,0 +1,23 @@
+.section {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  padding: 8px 12px;
+  border-bottom: 3px solid black;
+}
+
+.content {
+  margin: auto;
+  position: relative;
+}
+
+.wait:before {
+  position: absolute;
+  content: '';
+  height: 100%;
+  width: 100%;
+  left: 0;
+  cursor: wait;
+}

@@ -1,0 +1,27 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  color: whitesmoke;
+  font-weight: 500;
+  z-index: 1;
+}
+
+.section:before {
+  z-index: -1;
+  position: absolute;
+  content: '';
+  background-color: midnightblue;
+  height: 50vh;
+  width: 100vw;
+  left: 0;
+}
+
+.title {
+  padding: 8px 12px;
+  border-bottom: 3px solid whitesmoke;
+}
+
+.content {
+  margin: auto;
+}
+

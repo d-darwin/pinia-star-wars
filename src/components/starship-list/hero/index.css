@@ -1,0 +1,15 @@
+.hero {
+  padding: 4px 8px;
+  transition: all 100ms ease-in-out;
+}
+
+.hero:hover {
+  cursor: pointer;
+  background-color: slategray;
+  color: whitesmoke;
+}
+
+.selected {
+  background-color: midnightblue;
+  color: whitesmoke;
+}

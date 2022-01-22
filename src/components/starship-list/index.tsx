@@ -1,36 +1,74 @@
-import { defineComponent, VNode } from "vue";
+import { defineComponent, Transition, VNode } from "vue";
 import { useStarshipStore } from "@/store/starship";
+import spinnerSrc from "@/assets/spinner-dark.svg";
+import StarshipHero from "./hero";
+import styles from "./index.css?module";
 import { useFilmStore } from "@/store/film";
 
 export default defineComponent({
   // TODO: return type
   setup() {
-    const starshipStore = useStarshipStore();
     const filmStore = useFilmStore();
-    return { starshipStore, filmStore };
+    const starshipStore = useStarshipStore();
+
+    return { filmStore, starshipStore };
   },
 
   async created(): Promise<void> {
     await this.starshipStore.fetchList();
   },
 
+  computed: {
+    renderPlaceholder(): VNode {
+      return <div class={styles.content}>Empty</div>;
+    },
+    renderLoading(): VNode {
+      return <img src={spinnerSrc} class={styles.content} />;
+    },
+  },
+
   methods: {
-    async fetchItemFilmList(itemUrl: string): Promise<void> {
-      this.starshipStore.$patch({ selectedItemUrl: itemUrl });
-      const filmUrlList = this.starshipStore.selectedItemFilmUrlList;
-      await this.filmStore.fetchList(filmUrlList);
+    async selectItem(itemUrl: string): Promise<void> {
+      if (
+        this.starshipStore.selectedItemUrl !== itemUrl &&
+        !this.filmStore.pending
+      ) {
+        this.starshipStore.$patch({ selectedItemUrl: itemUrl });
+      }
     },
   },
 
   render(): VNode {
+    let content = this.renderPlaceholder;
+
+    if (this.starshipStore.pending) {
+      content = this.renderLoading;
+    } else if (this.starshipStore.list) {
+      content = (
+        <ul
+          class={{
+            [styles.content]: true,
+            [styles.wait]: this.filmStore.pending,
+          }}
+        >
+          {this.starshipStore.list.map((starship) => (
+            <StarshipHero
+              item={starship}
+              isSelected={starship.url === this.starshipStore.selectedItemUrl}
+              whenClick={() => this.selectItem(starship.url)}
+            />
+          ))}
+        </ul>
+      );
+    }
+
     return (
-      <ul>
-        {this.starshipStore.list.map((starship) => (
-          <li onClick={() => this.fetchItemFilmList(starship.url)}>
-            {starship.name}
-          </li>
-        ))}
-      </ul>
+      <section class={styles.section}>
+        <h2 class={styles.title}>Starships</h2>
+        <Transition name="fade" mode="out-in">
+          {content}
+        </Transition>
+      </section>
     );
   },
 });
