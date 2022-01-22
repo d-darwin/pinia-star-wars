@@ -1,7 +1,8 @@
 import { defineComponent, VNode } from "vue";
+import StarshipList from "@/components/starship-list";
 
 export default defineComponent({
   render(): VNode {
-    return <div>It works!</div>;
+    return <StarshipList />;
   },
 });
