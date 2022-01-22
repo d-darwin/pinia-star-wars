@@ -1,4 +1,6 @@
-# pinia-star-wars
+# Piña: Star Wars
+
+Just a demo project for "pinia" state manager tryouts.
 
 ## Project setup
 ```
