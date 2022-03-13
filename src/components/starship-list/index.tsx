@@ -6,7 +6,6 @@ import styles from "./index.css?module";
 import { useFilmStore } from "@/store/film";
 
 export default defineComponent({
-  // TODO: return type
   setup() {
     const filmStore = useFilmStore();
     const starshipStore = useStarshipStore();
@@ -23,7 +22,7 @@ export default defineComponent({
       return <div class={styles.content}>Empty</div>;
     },
     renderLoading(): VNode {
-      return <img src={spinnerSrc} class={styles.content} />;
+      return <img src={spinnerSrc} alt="" class={styles.content} />;
     },
   },
 

@@ -3,7 +3,6 @@ import Film from "@/api/models/film";
 import { fetchFilmList } from "@/api/handlers/film";
 
 export const useFilmStore = defineStore("film", {
-  /*TODO: typing*/
   state: () => ({
     list: [] as Film[],
     pending: false,

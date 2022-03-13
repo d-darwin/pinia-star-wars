@@ -3,7 +3,6 @@ import Starship from "@/api/models/starship";
 import { fetchStarshipList } from "@/api/handlers/starship";
 
 export const useStarshipStore = defineStore("starship", {
-  /*TODO: typing*/
   state: () => ({
     list: [] as Starship[],
     selectedItemUrl: "",
